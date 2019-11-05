@@ -4,14 +4,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-import org.apache.log4j.PropertyConfigurator;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.log4j.Log4j;
 
-
-//@Slf4j
+@Log4j
 public class MainApp {
-	private static final Logger mylog = LoggerFactory.getLogger(MainApp.class);
+	
 	
 	private String inputFileName;
 	private String outputFileName;
@@ -20,8 +17,8 @@ public class MainApp {
 	public static void main(final String[] args) {
 		MainApp myapp = new MainApp();
 		myapp.getProperties();
-		myapp.getLoggerProperties();
-		mylog.info("App Successfully ended");
+	//	myapp.getLoggerProperties();
+		log.debug("App Successfully ended");
 	}
 	
 	private void getProperties() {
@@ -41,27 +38,24 @@ public class MainApp {
 		
 	}
 	
-	private void getLoggerProperties() {
-		
-		Properties preferences = new Properties();
-		InputStream logProp = null;
-		try {
-		    logProp = ClassLoader.getSystemClassLoader().getResourceAsStream("log4j.properties");
-		    preferences.load(logProp);
-//		    LogManager.getLogManager().readConfiguration(logProp);
-		    PropertyConfigurator.configure(logProp);
-		    System.out.println("Here####");
-		} catch (IOException ex)
-		{
-		    System.out.println("WARNING: Could not open configuration file");
-		    System.out.println("WARNING: Logging not configured (console output only)");
-		}
-		mylog.info("starting myApp");
-}
+	/*
+	 * private void getLoggerProperties() {
+	 * 
+	 * Properties preferences = new Properties(); InputStream logProp = null; try {
+	 * logProp =
+	 * ClassLoader.getSystemClassLoader().getResourceAsStream("log4j.properties");
+	 * preferences.load(logProp); //
+	 * LogManager.getLogManager().readConfiguration(logProp);
+	 * PropertyConfigurator.configure(logProp); System.out.println("Here####"); }
+	 * catch (IOException ex) {
+	 * System.out.println("WARNING: Could not open configuration file");
+	 * System.out.println("WARNING: Logging not configured (console output only)");
+	 * } mylog.info("starting myApp");
+	 }*/
 	
 	
 	private void cliTerminate(final String message) {
-        mylog.error(message);
+        log.error(message);
 //        System.exit(1);
     }
 
